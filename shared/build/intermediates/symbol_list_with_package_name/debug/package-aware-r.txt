@@ -1,0 +1,2 @@
+com.pigs1493.gforcemonitor.shared
+xml automotive_app_desc
