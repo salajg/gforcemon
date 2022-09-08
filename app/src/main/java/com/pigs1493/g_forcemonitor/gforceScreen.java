@@ -19,7 +19,9 @@ import androidx.car.app.model.Row;
 import androidx.car.app.model.Template;
 import androidx.car.app.utils.StringUtils;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
@@ -35,6 +37,8 @@ public class gforceScreen extends Screen {
 
     private int refresh_delay = 1000;
 
+    private int init = 0;
+
     static gforceScreen create(@NonNull CarContext carContext) {
         return new gforceScreen(carContext);
     }
@@ -49,9 +53,12 @@ public class gforceScreen extends Screen {
             }
         }, refresh_delay);
         carSensors = getCarContext().getCarService(CarHardwareManager.class).getCarSensors();
-        startAccelerometer();
-        startCompass();
-        startGyro();
+        if (getCarContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            init = 1;
+            startAccelerometer();
+            startCompass();
+            startGyro();
+        }
     }
 
     @NonNull
@@ -68,6 +75,12 @@ public class gforceScreen extends Screen {
     }
 
     private void onRefresh() {
+        if (getCarContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && init == 0) {
+            init = 1;
+            startAccelerometer();
+            startCompass();
+            startGyro();
+        }
         this.invalidate();
     }
 
