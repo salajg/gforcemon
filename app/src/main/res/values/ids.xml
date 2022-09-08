@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="currentZ" type="id" />
+    <item name="currentY" type="id" />
+    <item name="currentX" type="id" />
+    <item name="maxZ" type="id" />
+    <item name="maxY" type="id" />
+    <item name="maxX" type="id" />
+</resources>
