@@ -24,7 +24,7 @@ public class gforceService extends CarAppService {
             @Override
             public Screen onCreateScreen(@NonNull Intent intent) {
                 if (getCarContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                   return new gforceScreen(getCarContext());
+                   return new gforceScreen(getCarContext(), 500);
                 }
 
                 // If we do not have the location permission, show the request permission screen.
